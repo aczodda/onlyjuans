@@ -187,8 +187,40 @@
       font-size: clamp(1.2rem, 3.6vw, 1.6rem);
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 0.55rem;
+      margin-bottom: 1.15rem;
       letter-spacing: -0.02em;
+    }
+
+    .punch {
+      margin: 0 auto 1.35rem;
+      padding: 1.15rem 1.2rem 1.05rem;
+      max-width: 34rem;
+      background: rgba(0, 180, 230, 0.07);
+      border: 1px solid rgba(0, 180, 230, 0.32);
+      border-radius: 16px;
+      box-shadow: 0 0 36px rgba(0, 180, 230, 0.1);
+    }
+
+    .punch q {
+      display: block;
+      quotes: "“" "”" "«" "»";
+      font-size: clamp(1.12rem, 3.5vw, 1.42rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.28;
+      color: var(--white);
+    }
+
+    html[lang="es"] .punch q { quotes: "«" "»" "“" "”"; }
+
+    .punch q::before { content: open-quote; color: var(--cyan); }
+    .punch q::after { content: close-quote; color: var(--cyan); }
+
+    .punch-sub {
+      margin-top: 0.5rem;
+      font-size: 0.92rem;
+      font-weight: 650;
+      color: var(--cyan-hot);
     }
 
     .lead {
@@ -331,52 +363,6 @@
       to { transform: translateX(-50%); }
     }
 
-    .teaser {
-      padding: 2.75rem 1.35rem 3.25rem;
-      max-width: 52rem;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .teaser h2 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.3rem;
-    }
-
-    .teaser p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.55rem;
-    }
-
-    .chip {
-      background: var(--surface);
-      border: 1px solid rgba(0, 180, 230, 0.22);
-      color: var(--text);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.55rem 0.85rem;
-      border-radius: 999px;
-    }
-
-    .chip small {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 650;
-      color: var(--cyan);
-      margin-top: 0.1rem;
-    }
-
     footer {
       background: #030406;
       color: #8a93a3;
@@ -438,7 +424,6 @@
     @media (max-width: 560px) {
       header { padding: 0.75rem 1rem; }
       .hero { padding: 3rem 1rem 2.5rem; }
-      .teaser { padding: 2.2rem 1rem 2.6rem; }
       .waitlist { flex-direction: column; align-items: stretch; }
       .waitlist input { width: 100%; flex: none; }
     }
@@ -464,6 +449,10 @@
         <div class="badge" data-i18n="badge">Coming soon · job board</div>
         <h1>The <span class="accent">Only</span> Juans</h1>
         <p class="tagline" data-i18n="tagline">Subscribe to the grind.</p>
+        <blockquote class="punch">
+          <q data-i18n="punch">Hardworking men are the ones who inspire most.</q>
+          <p class="punch-sub" data-i18n="punchSub">Subscribe to the grind — not that other feed.</p>
+        </blockquote>
         <p class="lead" data-i18n="lead">Real Juans. Real jobs. Not that site. The job one.</p>
         <p class="subtag" data-i18n="body">We’re building a parody job board for landscaping, HVAC, warehouse, construction, delivery, and food-service Juans. Ugly-cute work-boot energy. Hourly rates. Zero thirst traps.</p>
 
@@ -485,12 +474,6 @@
     <div class="marquee-wrap" aria-hidden="true">
       <div class="marquee" id="marquee"></div>
     </div>
-
-    <section class="teaser">
-      <h2 data-i18n="teaserTitle">The “subscriptions”</h2>
-      <p data-i18n="teaserSub">Hourly gigs for Juans. Unlock the job site gate — that’s it.</p>
-      <div class="chips" id="chips"></div>
-    </section>
   </main>
 
   <footer>
@@ -527,6 +510,8 @@
           langGroup: "Language",
           badge: "Coming soon · job board",
           tagline: "Subscribe to the grind.",
+          punch: "Hardworking men are the ones who inspire most.",
+          punchSub: "Subscribe to the grind — not that other feed.",
           lead: "Real Juans. Real jobs. Not that site. The job one.",
           body: "We’re building a parody job board for landscaping, HVAC, warehouse, construction, delivery, and food-service Juans. Ugly-cute work-boot energy. Hourly rates. Zero thirst traps.",
           emailLabel: "Email",
@@ -535,8 +520,6 @@
           hint: "Or email",
           postGig: "Got a gig? Ping us",
           pill: "Hourly rates, not spicy content. PG-13 grind only.",
-          teaserTitle: "The “subscriptions”",
-          teaserSub: "Hourly gigs for Juans. Unlock the job site gate — that’s it.",
           legal: "Parody disclaimer: Not affiliated with any adult platform. Just jobs for Juans. This is a joke job-board concept. No trademarks copied.",
           copy: "© 2026 OnlyJuans. Subscribe to the grind. Wear sunscreen.",
           toastOk: "You’re on the list. (Emotionally. Backend TBD.) We’ll pretend hello@theonlyjuans.com already knows.",
@@ -551,14 +534,6 @@
             "HVAC helpers welcome",
             "Food truck kings",
             "Warehouse warriors"
-          ],
-          chips: [
-            { t: "Landscaping", s: "$18/hr energy" },
-            { t: "HVAC", s: "cool-air membership" },
-            { t: "Warehouse", s: "shift subscribe" },
-            { t: "Construction", s: "hard-hat plan" },
-            { t: "Delivery", s: "mileage membership" },
-            { t: "Food service", s: "flavor subscription" }
           ]
         },
         es: {
@@ -567,6 +542,8 @@
           langGroup: "Idioma",
           badge: "Próximamente · bolsa de trabajo",
           tagline: "Suscríbete al jale.",
+          punch: "Los hombres que trabajan duro son los que más inspiran.",
+          punchSub: "Suscríbete al jale — no al otro feed.",
           lead: "Juans de verdad. Trabajos de verdad. No es ese sitio. Es el de la chamba.",
           body: "Estamos armando una bolsa de trabajo parodia para Juans de jardinería, HVAC, almacén, construcción, delivery y cocina. Energía de botas feas-cute. Se paga por hora. Cero contenido picante.",
           emailLabel: "Correo",
@@ -575,8 +552,6 @@
           hint: "O escríbenos a",
           postGig: "¿Tienes un jale? Avísanos",
           pill: "Tarifas por hora, no contenido picante. Solo jale PG-13.",
-          teaserTitle: "Las “suscripciones”",
-          teaserSub: "Jales por hora para Juans. Lo único que se desbloquea es el portón de la obra.",
           legal: "Descargo: No estamos afiliados a ninguna plataforma para adultos. Solo jales para Juans. Esto es una parodia de bolsa de trabajo. No copiamos marcas.",
           copy: "© 2026 OnlyJuans. Suscríbete a la chamba. Ponte bloqueador.",
           toastOk: "Ya estás en la lista. (En el espíritu. El backend viene luego.) hello@theonlyjuans.com ya se enteró… emocionalmente.",
@@ -591,14 +566,6 @@
             "Leyendas del césped",
             "Se buscan helpers de HVAC",
             "Reyes del food truck"
-          ],
-          chips: [
-            { t: "Jardinería", s: "energía de $18/hr" },
-            { t: "HVAC", s: "membresía de aire frío" },
-            { t: "Almacén", s: "suscripción al turno" },
-            { t: "Construcción", s: "plan de casco" },
-            { t: "Delivery", s: "membresía de millas" },
-            { t: "Cocina", s: "suscripción de sabor" }
           ]
         }
       };
@@ -620,11 +587,6 @@
         var items = c.marquee.concat(c.marquee);
         marquee.innerHTML = items.map(function (t) {
           return "<span>" + t + "</span>";
-        }).join("");
-
-        var chips = document.getElementById("chips");
-        chips.innerHTML = c.chips.map(function (chip) {
-          return "<div class=\"chip\">" + chip.t + "<small>" + chip.s + "</small></div>";
         }).join("");
       }
 
