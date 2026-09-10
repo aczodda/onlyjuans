@@ -2,7 +2,7 @@
 
 Funny single-page parody **job board** for “Juans” — regular Latino-coded guys with regular jobs (landscaping, HVAC, warehouse, construction, delivery, food service).
 
-**Not adult content.** Warm, self-deprecating, meme-y, PG-13. Tagline energy: *Subscribe to the grind* / *Real Juans. Real jobs.* / *Not that site. The job one.*
+**Not adult content.** Dark, self-deprecating, meme-y, PG-13 job-board parody. Tagline energy: *Subscribe to the grind* / *Real Juans. Real jobs.* / *Not that site. The job one.*
 
 Domain context: **theonlyjuans.com**
 
@@ -44,9 +44,9 @@ Point DNS for `theonlyjuans.com` at your host. Mailto CTAs use `hello@theonlyjua
 
 ## Brand rules (keep these)
 
-- Do **not** copy OnlyFans logos, fonts, exact color system, or trademarked wordmarks.
-- Original palette here: warm orange/gold + deep green (not OF blue/cyan trade dress).
-- Keep the job-board framing obvious so nobody mistakes it for adult content.
+- Do **not** copy OnlyFans logos, wordmarks, fonts, exact SVG marks, or trademarked assets.
+- Visual system evokes that *palette feel* only: near-black backgrounds, sky-cyan accents (~`#00b4e6` / `#00AFF0` family), white type. Original wordmark (cyan “Only” + white “Juans” + a simple “J” tile — not their mark).
+- Keep the job-board framing obvious so nobody mistakes it for adult content. Rates are hourly gigs, not adult subscriptions.
 - Footer disclaimer stays: *Not affiliated with any adult platform. Just jobs for Juans.*
 
 ## Joke in one line
