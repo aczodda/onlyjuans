@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OnlyJuans — Real Juans. Real Jobs.</title>
+  <meta name="description" content="OnlyJuans is a parody job board for hardworking Juans. Subscribe to the grind. Not that site. The job one. theonlyjuans.com" />
+  <style>
+    :root {
+      --orange: #e85d04;
+      --gold: #f4a261;
+      --cream: #fff8f0;
+      --deep-green: #1a3c34;
+      --forest: #2d6a4f;
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --card: #ffffff;
+      --shadow: 0 12px 40px rgba(26, 60, 52, 0.15);
+      --radius: 18px;
+      --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    /* Decorative stripe */
+    .top-stripe {
+      height: 8px;
+      background: linear-gradient(90deg, var(--orange), var(--gold), var(--forest), var(--deep-green));
+    }
+
+    /* Nav */
+    header {
+      background: var(--deep-green);
+      color: var(--cream);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 0.15rem;
+    }
+
+    .logo .only { color: var(--gold); }
+    .logo .juans { color: var(--cream); }
+    .logo .tilde {
+      color: var(--orange);
+      font-size: 1.1em;
+      line-height: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a.nav-link {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+    nav a.nav-link:hover { opacity: 1; text-decoration: underline; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 4px 0 var(--deep-green);
+    }
+    .btn-primary:hover { background: #d14f00; }
+
+    .btn-secondary {
+      background: var(--gold);
+      color: var(--deep-green);
+      box-shadow: 0 4px 0 #c47a3a;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border-color: var(--gold);
+    }
+    .btn-ghost:hover { background: rgba(244, 162, 97, 0.15); }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--deep-green);
+      border-color: var(--deep-green);
+    }
+    .btn-outline-dark:hover { background: var(--deep-green); color: var(--cream); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 3.5rem 1.5rem 4rem;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(244, 162, 97, 0.35), transparent 50%),
+        radial-gradient(ellipse at 80% 10%, rgba(232, 93, 4, 0.2), transparent 45%),
+        linear-gradient(180deg, #fff1e0 0%, var(--cream) 100%);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "👷 🚚 🌿 🔧 🌮 📦";
+      position: absolute;
+      inset: 0;
+      font-size: 2.5rem;
+      opacity: 0.08;
+      letter-spacing: 1.5rem;
+      line-height: 3.5;
+      pointer-events: none;
+      user-select: none;
+      transform: rotate(-6deg) scale(1.2);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--deep-green);
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 8vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--deep-green);
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 .accent { color: var(--orange); }
+
+    .tagline {
+      font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .subtag {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin: 0 auto 1.75rem;
+      position: relative;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .disclaimer-pill {
+      display: inline-block;
+      background: #fff;
+      border: 2px dashed var(--orange);
+      color: var(--deep-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      position: relative;
+      max-width: 28rem;
+    }
+
+    /* Marquee */
+    .marquee-wrap {
+      background: var(--orange);
+      color: #fff;
+      overflow: hidden;
+      padding: 0.65rem 0;
+      border-top: 3px solid var(--deep-green);
+      border-bottom: 3px solid var(--deep-green);
+    }
+
+    .marquee {
+      display: flex;
+      gap: 2.5rem;
+      width: max-content;
+      animation: scroll 28s linear infinite;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .marquee span::before {
+      content: "★ ";
+      color: var(--gold);
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Sections */
+    section {
+      padding: 3.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      font-weight: 900;
+      color: var(--deep-green);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+
+    /* Cards grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.35rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow);
+      border: 3px solid var(--deep-green);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover { transform: rotate(-1deg) scale(1.02); }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, transparent 50%, var(--gold) 50%);
+      opacity: 0.5;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--deep-green);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      font-weight: 900;
+      border: 3px solid var(--orange);
+      flex-shrink: 0;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--deep-green);
+      line-height: 1.2;
+    }
+
+    .job-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .blurb {
+      font-size: 0.95rem;
+      color: var(--muted);
+      flex-grow: 1;
+    }
+
+    .rate {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: #fff4e8;
+      border-radius: 12px;
+      padding: 0.65rem 0.85rem;
+      border: 2px solid var(--gold);
+    }
+
+    .rate .price {
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--deep-green);
+    }
+
+    .rate .sub {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--deep-green);
+      color: var(--cream);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    /* How it works */
+    .how {
+      background: var(--deep-green);
+      color: var(--cream);
+      max-width: none;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .how .section-head h2 { color: var(--gold); }
+    .how .section-head p { color: rgba(255,248,240,0.75); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(244, 162, 97, 0.4);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 0.85rem;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.35rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--gold);
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: var(--gold);
+    }
+
+    .step p { font-size: 0.95rem; opacity: 0.9; }
+
+    /* CTA band */
+    .cta-band {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background:
+        linear-gradient(135deg, #fff1e0, #ffe8cc);
+      border-top: 4px solid var(--gold);
+      border-bottom: 4px solid var(--gold);
+      max-width: none;
+    }
+
+    .cta-band h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--deep-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-band p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: #bbb;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer .brand {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    footer .domain {
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    footer .legal {
+      max-width: 36rem;
+      margin: 0 auto 1rem;
+      line-height: 1.55;
+      border: 1px dashed #555;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      background: #222;
+    }
+
+    footer .copy {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* Toast for fake buttons */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--deep-green);
+      color: var(--cream);
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      border: 2px solid var(--gold);
+      z-index: 100;
+      transition: transform 0.3s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 520px) {
+      header { justify-content: center; text-align: center; }
+      nav { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-stripe" aria-hidden="true"></div>
+
+  <header>
+    <a href="#" class="logo" aria-label="OnlyJuans home">
+      <span class="only">Only</span><span class="juans">Juans</span><span class="tilde" aria-hidden="true">~</span>
+    </a>
+    <nav>
+      <a class="nav-link" href="#featured">Featured Juans</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="btn btn-ghost" href="mailto:hello@theonlyjuans.com">Post a gig</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" style="max-width:none; padding-left:1.5rem; padding-right:1.5rem;">
+      <div class="badge">JOB BOARD · NOT THAT OTHER THING</div>
+      <h1>The <span class="accent">Only</span> Juans</h1>
+      <p class="tagline">Subscribe to the grind.</p>
+      <p class="subtag">
+        Real Juans. Real jobs. Landscaping, HVAC, warehouse, construction, delivery, food trucks —
+        ugly-cute dudes with work boots and a solid work ethic. Not that site. The job one.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#featured">Find a Juan</a>
+        <a class="btn btn-secondary" href="mailto:hello@theonlyjuans.com?subject=Post%20a%20gig%20on%20OnlyJuans">Post a gig</a>
+      </div>
+      <p class="disclaimer-pill">
+        🛠️ Hourly rates, not spicy content. PG-13 grind only.
+      </p>
+    </section>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span>Real Juans. Real jobs.</span>
+        <span>Subscribe to the grind</span>
+        <span>$12.50/hr energy</span>
+        <span>Not affiliated with adult platforms</span>
+        <span>Lawn care legends</span>
+        <span>HVAC helpers welcome</span>
+        <span>Food truck kings</span>
+        <span>Warehouse warriors</span>
+        <span>Real Juans. Real jobs.</span>
+        <span>Subscribe to the grind</span>
+        <span>$12.50/hr energy</span>
+        <span>Not affiliated with adult platforms</span>
+        <span>Lawn care legends</span>
+        <span>HVAC helpers welcome</span>
+        <span>Food truck kings</span>
+        <span>Warehouse warriors</span>
+      </div>
+    </div>
+
+    <section id="featured">
+      <div class="section-head">
+        <h2>Featured Juans</h2>
+        <p>These guys showed up on time, brought their own gloves, and still somehow make it meme-able.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">J</div>
+            <div>
+              <h3>Juan</h3>
+              <div class="job-title">Landscaping Lead</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Will turn your jungle into a golf course. Owns three weed-whackers and zero chill about edges.
+            Smiles like he just found free mulch.
+          </p>
+          <div class="tags">
+            <span class="tag">mow</span>
+            <span class="tag">edge</span>
+            <span class="tag">sunburn</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$18/hr</div>
+              <div class="sub">“subscription” to the yard</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Juan says: bring water, leave the weeds.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JC</div>
+            <div>
+              <h3>Juancito</h3>
+              <div class="job-title">Lawn Care Specialist</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Short king energy. Long hours. Will explain why your grass is sad in three languages
+            and then fix it before lunch.
+          </p>
+          <div class="tags">
+            <span class="tag">fertilizer</span>
+            <span class="tag">vibes</span>
+            <span class="tag">early bird</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$15/hr</div>
+              <div class="sub">monthly “grass pass”</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Juancito booked. Your lawn is about to glow up.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">BJ</div>
+            <div>
+              <h3>Big Juan</h3>
+              <div class="job-title">HVAC Helper</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Built like a fridge, knows how to fix one. Will crawl into your attic so you don’t have to.
+            Says “it’s just Freon, bro” with confidence.
+          </p>
+          <div class="tags">
+            <span class="tag">AC</span>
+            <span class="tag">attic</span>
+            <span class="tag">cool</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$22/hr</div>
+              <div class="sub">cool air membership</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Big Juan is on the way. Stay hydrated.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JP</div>
+            <div>
+              <h3>Juan Pablo</h3>
+              <div class="job-title">Warehouse Associate</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Forklift certified, playlist curated. Scans packages faster than you can say “open dock.”
+            Will share his snacks if you’re cool.
+          </p>
+          <div class="tags">
+            <span class="tag">pallet</span>
+            <span class="tag">OT</span>
+            <span class="tag">scanner</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$16.50/hr</div>
+              <div class="sub">shift “subscribe”</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Juan Pablo clocked in. Dock 3 is saved.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JT</div>
+            <div>
+              <h3>Juanito</h3>
+              <div class="job-title">Food Truck Grill Master</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Makes a torta that could end wars. Works a 4ft kitchen like a stadium.
+            Tip jar labeled “college? nah, propane.”
+          </p>
+          <div class="tags">
+            <span class="tag">tacos</span>
+            <span class="tag">propane</span>
+            <span class="tag">salsa</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$14/hr + tips</div>
+              <div class="sub">flavor subscription</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Juanito says: al pastor or bust.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JD</div>
+            <div>
+              <h3>Don Juan (of Drywall)</h3>
+              <div class="job-title">Construction / Framing</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Not that Don Juan. This one frames walls and tells dad jokes at 6am.
+            Hard hat has stickers. Heart has overtime.
+          </p>
+          <div class="tags">
+            <span class="tag">hammer</span>
+            <span class="tag">safety</span>
+            <span class="tag">beams</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$25/hr</div>
+              <div class="sub">build-a-Juan plan</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Drywall Don Juan: measuring twice, cutting once.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JG</div>
+            <div>
+              <h3>Juanito “GPS”</h3>
+              <div class="job-title">Delivery Driver</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Knows every shortcut, every speed bump, every abuela who tips in cookies.
+            Van smells like air freshener and ambition.
+          </p>
+          <div class="tags">
+            <span class="tag">routes</span>
+            <span class="tag">on-time</span>
+            <span class="tag">honk</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$12.50/hr</div>
+              <div class="sub">mileage “membership”</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="GPS Juan is en route. ETA: whenever traffic allows.">Hire</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" aria-hidden="true">JJ</div>
+            <div>
+              <h3>Juan José</h3>
+              <div class="job-title">Restaurant Prep / Line</div>
+            </div>
+          </div>
+          <p class="blurb">
+            Dice onions without crying (much). Runs the line like a DJ.
+            Will call you “jefe” even if you’re the new hire.
+          </p>
+          <div class="tags">
+            <span class="tag">prep</span>
+            <span class="tag">tickets</span>
+            <span class="tag">family meal</span>
+          </div>
+          <div class="rate">
+            <div>
+              <div class="price">$13.75/hr</div>
+              <div class="sub">kitchen subscribe</div>
+            </div>
+            <button type="button" class="btn btn-primary" style="padding:0.45rem 0.9rem;font-size:0.8rem;" data-toast="Juan José: behind you! (also, order up)">Hire</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="how-inner">
+        <div class="section-head">
+          <h2>How OnlyJuans works</h2>
+          <p>Three steps. Zero thirst traps. Maximum clock-in energy.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Post a gig</h3>
+            <p>Need a lawn mowed, a van unloaded, or a food truck co-pilot? Drop the details. We keep it PG-13.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Find a Juan</h3>
+            <p>Browse featured Juans (or Juans-adjacent legends). Match on skills, rates, and dad-joke compatibility.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>Subscribe to the grind</h3>
+            <p>Pay hourly like a normal job. The “subscription” joke is the punchline — the paycheck is real.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" id="cta">
+      <h2>Got work? Need a Juan?</h2>
+      <p>Post a gig or tap Find a Juan. We’re a parody job board with heart — and hard hats.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:hello@theonlyjuans.com?subject=Post%20a%20gig%20on%20OnlyJuans">Post a gig</a>
+        <a class="btn btn-outline-dark" href="#featured">Find a Juan</a>
+        <a class="btn btn-secondary" href="mailto:hello@theonlyjuans.com?subject=Hello%20from%20theonlyjuans.com">hello@theonlyjuans.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand">OnlyJuans · The Only Juans</div>
+    <div class="domain">theonlyjuans.com</div>
+    <p class="legal">
+      <strong>Parody disclaimer:</strong> Not affiliated with any adult platform. Just jobs for Juans.
+      This is a joke job-board concept. No trademarks copied. Real Juans. Real jobs. Fake profiles for laughs.
+    </p>
+    <p class="copy">© 2026 OnlyJuans. Subscribe to the grind. Wear sunscreen.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      var toast = document.getElementById("toast");
+      var timer;
+      document.querySelectorAll("[data-toast]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          toast.textContent = btn.getAttribute("data-toast");
+          toast.classList.add("show");
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            toast.classList.remove("show");
+          }, 2800);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
